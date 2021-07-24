@@ -1,6 +1,6 @@
 import { Avatar, Divider, Paper, IconButton, Chip } from "@material-ui/core";
 import { useState } from 'react'
-// import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'html-react-parser';
 import TodayIcon from '@material-ui/icons/Today';
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@material-ui/icons/ThumbDownAltRounded';
