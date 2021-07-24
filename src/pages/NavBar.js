@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,9 +16,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import LabelIcon from '@material-ui/icons/Label';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { ImageContext } from '../Context/Context';
 
 const drawerWidth = 240;
 
@@ -80,6 +85,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  const history=useHistory();
+  const {setImage}=useContext(ImageContext);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -132,19 +139,29 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
+
+            <Link to="/" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
+              <ListItem button onClick={() => {
+                        localStorage.removeItem("userData");
+                        localStorage.removeItem("profilePic");
+                        setImage(null);
+                        localStorage.removeItem("randid");
+                        localStorage.removeItem("googleAccessToken");
+                        history.push("/login");
+                      }}>
+                <HomeIcon style={{marginRight:"14px"}}/>
+                Home
+              </ListItem>
+             </Link>
+
             <Link to="/ask_question" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
               <ListItem button>
-                <ListAltIcon style={{marginRight:"14px"}}/>
+                <AssignmentLateIcon style={{marginRight:"14px"}}/>
                 Ask a question
               </ListItem>
              </Link>
 
-             <Link to="/" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
-              <ListItem button>
-                <ListAltIcon style={{marginRight:"14px"}}/>
-                Home
-              </ListItem>
-             </Link>
+           
 
              <Link to="/activity" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
               <ListItem button>
@@ -155,11 +172,17 @@ export default function PersistentDrawerLeft() {
 
              <Link to="/tags" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
               <ListItem button>
-                <ListAltIcon style={{marginRight:"14px"}}/>
+                <LabelIcon style={{marginRight:"14px"}}/>
                 Tags
               </ListItem>
              </Link>
-         
+
+             <Link to="/tags" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
+              <ListItem button>
+                <ExitToAppIcon style={{marginRight:"14px"}}/>
+                LogOut
+              </ListItem>
+             </Link>
         </List>
       </Drawer>
     </div>
