@@ -1,0 +1,15 @@
+.form-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container > .MuiTextField-root {
+  margin-bottom: 10px;
+}
+
+.submit-btn {
+  margin-top: 10px !important;
+  max-width: 100px;
+  /* background-color: ; */
+}

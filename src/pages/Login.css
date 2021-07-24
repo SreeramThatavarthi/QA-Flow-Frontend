@@ -1,0 +1,15 @@
+.centered {
+	display: flex;
+	width: 100vw;
+	height: 60vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.centered2 {
+	display: flex;
+	width: 100vw;
+	height: 5px;
+	justify-content: center;
+	align-items: center;
+}

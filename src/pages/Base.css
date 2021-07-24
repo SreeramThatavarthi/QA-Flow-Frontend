@@ -1,0 +1,49 @@
+.bold-text {
+  font-weight: bolder !important;
+}
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+.flex-08 {
+  flex: 0.8 !important;
+}
+
+.flex-02 {
+  flex: 0.2 !important;
+}
+
+.input-container {
+  background-color: #363e6b57;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+.side-bar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  background-color: white;
+}
+
+.link-sidebar:hover {
+  background-color: #f5f6fa !important;
+}
+
+.content-plane {
+  margin-left: 250px;
+  padding: 30px;
+}
+
+.router-link,
+.router-link:hover,
+.router-link:focus,
+.router-link:active {
+  text-decoration: none;
+  color: inherit;
+}
