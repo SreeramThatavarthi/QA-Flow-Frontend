@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect,useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -87,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerLeft() {
   const history=useHistory();
   const {setImage}=useContext(ImageContext);
+  const [User,setUser]=useState("");
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -98,6 +99,10 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  useEffect(() => {
+   var data=localStorage.getItem("username");
+   setUser(data.user.name)
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -133,22 +138,17 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
+          {User}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
+        
         <List>
 
             <Link to="/" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
-              <ListItem button onClick={() => {
-                        localStorage.removeItem("userData");
-                        localStorage.removeItem("profilePic");
-                        setImage(null);
-                        localStorage.removeItem("randid");
-                        localStorage.removeItem("googleAccessToken");
-                        history.push("/login");
-                      }}>
+              <ListItem button>
                 <HomeIcon style={{marginRight:"14px"}}/>
                 Home
               </ListItem>
@@ -177,8 +177,14 @@ export default function PersistentDrawerLeft() {
               </ListItem>
              </Link>
 
-             <Link to="/tags" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
-              <ListItem button>
+             <Link to="/login" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
+              <ListItem button  onClick={() => {
+                        localStorage.removeItem("userData");
+                        localStorage.removeItem("profilePic");
+                        setImage(null);
+                        localStorage.removeItem("randid");
+                        localStorage.removeItem("googleAccessToken");
+                      }}>
                 <ExitToAppIcon style={{marginRight:"14px"}}/>
                 LogOut
               </ListItem>

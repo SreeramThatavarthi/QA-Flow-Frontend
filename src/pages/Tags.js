@@ -5,8 +5,17 @@ import { config } from "../config";
 import BasePage from "./BasePage";
 import { useHistory } from 'react-router-dom';
 import Info from "../components/Info";
+import { useMediaQuery } from 'react-responsive';
 
 function Tags() {
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
+  const isTabletOrMobileDevice = useMediaQuery({
+    query: '(max-device-width: 1224px)'
+  })
+
   const [questions, setQuestions] = useState([]);
 
   const history = useHistory();
@@ -32,7 +41,11 @@ function Tags() {
     <BasePage>
       <h1>Popular tags</h1>
       <br />
-      {questions.length !== 0 ? <GridContainer>
+     {
+       isDesktopOrLaptop &&
+       <>
+        {questions.length !== 0 ?
+       <GridContainer>
         {questions.map((question) => {
           return (
             <TagCard
@@ -46,6 +59,28 @@ function Tags() {
           );
         })}
       </GridContainer> : <Info msg="No Questions are available" type="info"></Info>}
+       </>
+     }
+     {
+       isTabletOrMobileDevice &&
+       <>
+        {questions.length !== 0 ?
+       <div className="p-2">
+        {questions.map((question) => {
+          return (
+            <TagCard
+              key={question._id}
+              id={question._id}
+              title={question.title}
+              tags={question.tags}
+              likes={question.upVotes}
+              dislikes={question.downVotes}
+            />
+          );
+        })}
+      </div> : <Info msg="No Questions are available" type="info"></Info>}
+      </>
+     }
 
     </BasePage>
   );
