@@ -128,7 +128,7 @@ function QuestionCard({
         <h2><Link to={`/question/${id}`}>{title}</Link></h2>
       </div>
       <div className="card-body-content">
-        {/* {ReactHtmlParser(body)} */}
+        {ReactHtmlParser(body)}
       </div>
       <Divider />
       <section className="card-footer">
