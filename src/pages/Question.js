@@ -87,7 +87,7 @@ function Question(props) {
         }).then((res) => {
             return res.json();
         }).then((data) => {
-            ShowTextArea=false;
+            showTextArea=false;
             setAnsText('')
             toast.success('Answer Posted 👍🏻', {
                 autoClose: 3000,
