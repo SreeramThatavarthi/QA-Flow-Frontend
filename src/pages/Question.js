@@ -226,14 +226,21 @@ function Question() {
 
             {showTextArea ? (
                 <div className="p-2">
-                    {
+                    <div style={{ marginBottom: "15px" }}>
+                        <InputGroup size="lg">
+                        <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" as="textarea" rows={7} onChange={(e) => {
+                            setAnsText(e.target.value);
+                        }} value={ansText} placeholder="Enter Description..."/>
+                        </InputGroup>
+                    </div>
+                    {/* {
                         isDesktopOrLaptop &&
                     <TextEditor setText={setAnsText} text={ansText}></TextEditor>
                     }
                     {
                         isTabletOrMobileDevice &&
                             <MiniTextEditor setText={setAnsText} text={ansText}></MiniTextEditor>
-                    }
+                    } */}
                     <Button
                         onClick={() => {
                             inputFile.current.click();

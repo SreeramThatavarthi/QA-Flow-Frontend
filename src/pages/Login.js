@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import { config } from "../config";
 import { useHistory } from 'react-router-dom';
@@ -8,12 +8,15 @@ import pic from '../assests/loginImg.png';
 import "./Login.css";
 import { ImageContext } from "../Context/Context";
 import GoogleButton from 'react-google-button'
+import PropagateLoader from "react-spinners/BeatLoader";
+
 const axios = require('axios');
 function Login() {
   const history = useHistory();
   const { setImage } = useContext(ImageContext);
-
+  const [loading,setLoading]=useState(false)
   const ResponseGoogle = (response) => {
+    setLoading(true)
     console.log(response)
     console.log(response.tokenId)
       localStorage.setItem("googleAccessToken", response.tokenId);
@@ -23,7 +26,7 @@ function Login() {
         idToken: response.tokenId
       })
         .then(function (response) {
-   
+          setLoading(false);
           toast("Google SignIn Success",{type:"success"});
           localStorage.setItem("userData", JSON.stringify(response.data));
           history.push('/')
@@ -36,6 +39,7 @@ function Login() {
   return (
     <>
       <div className="centered">
+      <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" size={10} /></div>
         <div className="d-flex" style={{ marginTop: "80px" }}>
           <img
             alt="gitam-logo"

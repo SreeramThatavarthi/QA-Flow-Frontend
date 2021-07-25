@@ -191,7 +191,14 @@ function AskQuestion() {
             }} placeholder="Enter Question Title" value={title} />
           </InputGroup>
         </div>
-        {
+        <div style={{ marginBottom: "15px" }}>
+            <InputGroup size="lg">
+              <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" as="textarea" rows={7} onChange={(e) => {
+                setQuestion(e.target.value);
+              }} value={question} placeholder="Enter Description..."/>
+            </InputGroup>
+           </div>
+        {/* {
           isDesktopOrLaptop &&
         <TextEditor setText={setQuestion} text={question}></TextEditor>
         }
@@ -205,7 +212,7 @@ function AskQuestion() {
           //   </InputGroup>
           // </div>
           <MiniTextEditor setText={setQuestion} text={question}></MiniTextEditor>
-        }
+        } */}
         <div style={{ marginTop: "15px" }}>
 
         <ReactTags 
