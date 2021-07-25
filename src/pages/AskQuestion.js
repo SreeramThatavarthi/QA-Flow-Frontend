@@ -30,12 +30,6 @@ function AskQuestion() {
   const [question, setQuestion] = useState(questionBody);
   const [tags, setTags] = useState([]);
   const [productTags,setProductTags]=useState([]);
-  useEffect(()=>{
-    questionTags.map((q)=>{
-      console.log(q);
-      tags.push({ id:q, text: q });
-    })
-  },[])
   const [suggestions,setSuggestions]=useState([
     { id: "", text: "" },
     ]);
@@ -164,11 +158,16 @@ function AskQuestion() {
   }
 
   useEffect(() => {
+    questionTags.map((q)=>{
+      console.log(q);
+      tags.push({ id:q, text: q });
+    })
+
     if (localStorage.getItem("userData") === null) {
       toast("Please login",{type:"warning"})
       history.push('/login')
     }
-  }, [history]);
+  }, []);
 
   return (
     <BasePage>

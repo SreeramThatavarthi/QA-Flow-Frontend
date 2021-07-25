@@ -40,7 +40,6 @@ import AdminSearch from "./pages/Admin/AdminSearch";
 import { useMediaQuery } from 'react-responsive';
 import PersistentDrawerLeft from "./pages/NavBar";
 import { ToastContainer } from "react-toastify";
-import EditQuestion from "./pages/EditQuestion";
 const dummyOptions = [];
 
 function App() {
@@ -241,9 +240,6 @@ function App() {
             </Route>
             <Route exact path="/ask_question">
               <AskQuestion />
-            </Route>
-            <Route exact path="/edit/question">
-              <EditQuestion />
             </Route>
             <Route exact path="/tags">
               <Tags />
