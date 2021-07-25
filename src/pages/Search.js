@@ -64,12 +64,8 @@ function Search() {
 
     return (
         <BasePage>
-        {
-            (questions.length==0)&&
-            <h1 style={{textAlign:"center",marginTop:"200px"}}>No questions found,Try some other tags</h1>
-        }
          {
-            (questions.length>0)&&
+            (questions.length>0)?(
                 questions.map((question) => (
                         <QuestionCard
                             title={question.title}
@@ -85,7 +81,9 @@ function Search() {
                             updateQuestion={updateQuestion}
                         />
                     )
-                ) 
+                ) ):(
+                    <h1 style={{textAlign:"center",marginTop:"200px"}}>No questions found,Try some other tags</h1>
+                )
                 }
         </BasePage>
 

@@ -6,6 +6,14 @@ import BasePage from "./BasePage";
 import { useHistory } from 'react-router-dom';
 import Info from "../components/Info";
 import { useMediaQuery } from 'react-responsive';
+import PropagateLoader from "react-spinners/BeatLoader";
+import { css } from "@emotion/react";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 function Tags() {
 
@@ -17,7 +25,7 @@ function Tags() {
   })
 
   const [questions, setQuestions] = useState([]);
-
+  const [loading,setLoading]=useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -34,6 +42,7 @@ function Tags() {
       })
         .then((res) => res.json())
         .then((data) => {
+          setLoading(false)
           console.log(data);
           setQuestions(data["question"]);
         });
@@ -42,6 +51,7 @@ function Tags() {
 
   return (
     <BasePage>
+    <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" loading={loading} css={override} size={10} /></div>
       <h1 style={{textAlign:"center",marginTop:"2px"}}>Popular tags</h1>
       <br />
      {
@@ -61,14 +71,17 @@ function Tags() {
             />
           );
         })}
-      </GridContainer> : <Info msg="No Questions are available" type="info"></Info>}
+      </GridContainer> :(
+        (!loading)&&
+        <Info msg="No Questions are available" type="info"></Info>
+      )}
        </>
      }
      {
        isTabletOrMobileDevice &&
        <>
         {questions.length !== 0 ?
-       <div className="p-2">
+       <div className="p-3">
         {questions.map((question) => {
           return (
             <TagCard
@@ -81,7 +94,11 @@ function Tags() {
             />
           );
         })}
-      </div> : <div style={{padding:"3px"}}><Info msg="No Questions are available" type="info" ></Info></div>}
+      </div> : 
+      (
+        (!loading)&&
+        <div style={{padding:"3px"}}><Info msg="No Questions are available" type="info" ></Info></div>
+      )}
       </>
      }
 

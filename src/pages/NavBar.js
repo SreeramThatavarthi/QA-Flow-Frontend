@@ -159,7 +159,7 @@ export default function PersistentDrawerLeft() {
 
             <Link to="/ask_question" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
               <ListItem button>
-                <AssignmentLateIcon style={{marginRight:"14px"}}/>
+                <HomeIcon style={{marginRight:"14px"}}/>
                 Ask a question
               </ListItem>
              </Link>

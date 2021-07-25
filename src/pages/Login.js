@@ -25,15 +25,12 @@ function Login() {
         idToken: response.tokenId
       })
         .then(function (response) {
-          console.log(11);
-          toast("Google SignIn Success");
+          toast("Google SignIn Success",{type:"success"});
           localStorage.setItem("userData", JSON.stringify(response.data));
           history.push('/')
         })
         .catch(function (error) {
-          console.log(111);
-          toast("Google SignIn Failed, Try Again");
-          console.log(error);
+          toast("Google SignIn Failed, Try Again",{type:"error"});
         });
   };
   return (
