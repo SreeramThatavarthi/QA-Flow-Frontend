@@ -50,10 +50,7 @@ function AskQuestion() {
     }
 
     const handleAddition=(tag)=>{
-      
       setTags([...tags,tag])
-      
-      console.log("tags",tags);
     }
 
     const handleDrag=(tag, currPos, newPos)=> {
@@ -69,9 +66,10 @@ function AskQuestion() {
   const createQuestion = () => {
     if(title!=''&&question!='' )
     {
-    Object.entries(tags).map((s,t)=>{
-      productTags.push(s[1].id);
-    })
+     
+        Object.entries(tags).map((s,t)=>{
+          productTags.push(s[1].id);
+        })
     const userData = JSON.parse(localStorage.getItem('userData'))
     console.log(file);
     fetch(`${config.apiUrl}/api/new/question`, {
@@ -132,6 +130,7 @@ function AskQuestion() {
         "Content-Type": "application/json",
       },
     }).then((res) => {
+      console.log("res",res)
       setTags([]);
       setQuestion("");
       setTitle("");
@@ -139,7 +138,8 @@ function AskQuestion() {
         pathname: "/activity",
         state: { pos: 0 },
       });
-    });
+    })
+    .catch((err)=>{console.log("err",err)})
   }
 
   const uploadDoc = (e) => {
