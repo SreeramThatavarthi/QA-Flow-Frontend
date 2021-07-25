@@ -3,11 +3,11 @@ import QuestionCard from "../components/QuestionCard";
 import { useHistory, useLocation } from 'react-router-dom';
 import { config } from "../config";
 import BasePage from "./BasePage";
-import { AdminContext } from "../Context/Context";
+import { AdminContext, QuestionContext } from "../Context/Context";
 import Info from "../components/Info";
 
 function Home() {
-  const [questions, setQuestions] = useState([]);
+  const {questions, setQuestions} = useContext(QuestionContext)
   const history = useHistory();
   const location = useLocation()
   const { setAdmin } = useContext(AdminContext);

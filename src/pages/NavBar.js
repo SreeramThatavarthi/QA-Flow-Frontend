@@ -100,8 +100,11 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
   useEffect(() => {
-   var data=localStorage.getItem("username");
+   var data=JSON.parse(localStorage.getItem("userData"));
+   if(data)
+   {
    setUser(data.user.name)
+   }
   }, []);
 
   return (
