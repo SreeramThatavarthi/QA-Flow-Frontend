@@ -22,9 +22,9 @@ function Question(props) {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [file, setFile] = useState('');
-    const [showTextArea, setShowTextArea] = useState(boolTextBox);
+    // const [showTextArea, setShowTextArea] = useState(boolTextBox);
     const [ansText, setAnsText] = useState(ansTextBox)
-
+    var showTextArea=boolTextBox;
     const uploadDoc = (e) => {
         console.log(e.target.files[0])
         setFile('')
@@ -87,7 +87,7 @@ function Question(props) {
         }).then((res) => {
             return res.json();
         }).then((data) => {
-            setShowTextArea(false)
+            ShowTextArea=false;
             setAnsText('')
             toast.success('Answer Posted 👍🏻', {
                 autoClose: 3000,
@@ -171,7 +171,7 @@ function Question(props) {
                                 type="button"
                                 class="btn btn-primary"
                                 style={{ float: "right" }}
-                                onClick={() => setShowTextArea(!showTextArea)}
+                                onClick={() => {showTextArea=showTextArea?false:true}}
                             >
                                 <strong> Add Answer  <i class="bi bi-plus-circle" style={{ fontSize: "15px" }}></i></strong>
                             </button>
@@ -181,9 +181,7 @@ function Question(props) {
                                     type="button"
                                     class="btn btn-danger"
                                     style={{ float: "right" }}
-                                    onClick={() => {
-                                        setShowTextArea(!showTextArea);
-                                    }}
+                                    onClick={() => {showTextArea=showTextArea?false:true}}
                                 >
                                     <strong>Close <i class="bi bi-x-circle" style={{ fontSize: "15px" }}></i> </strong>
                                 </button>
@@ -227,7 +225,7 @@ function Question(props) {
                 </>
 
             ) : (
-                <>
+                <div className="p-2">
                     {answers.map((answer) => {
                         console.log(answer)
                         return (
@@ -246,7 +244,7 @@ function Question(props) {
 
                         );
                     })}
-                </>
+                </div>
             )}
             <input type='file' id='file' ref={inputFile} style={{ display: 'none' }} onChange={uploadDoc} />
         </BasePage>

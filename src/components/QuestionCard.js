@@ -119,7 +119,7 @@ function QuestionCard({
   };
 
   return (
-    <Paper className="card" elevation={2}>
+    <Paper className="card p-2" elevation={2}>
       <section className="card-header">
         {new Date(postedOn).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}<TodayIcon style={{ marginLeft: "4px" }}></TodayIcon>
       </section>
@@ -166,7 +166,9 @@ function QuestionCard({
           />
         </section>
       </section>
+     
     </Paper>
+
   );
 }
 

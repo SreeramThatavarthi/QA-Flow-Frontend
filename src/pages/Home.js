@@ -81,7 +81,7 @@ function Home() {
               updateQuestion={updateQuestion}
             />
           );
-        }) : <Info msg="No Questions are available" type="info"></Info>
+        }) : <div className="p-2"><Info msg="No Questions are available" type="info"></Info></div>
       }
     </BasePage>
   );

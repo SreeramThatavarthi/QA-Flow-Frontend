@@ -42,7 +42,7 @@ function Tags() {
 
   return (
     <BasePage>
-      <h1>Popular tags</h1>
+      <h1 style={{textAlign:"center",marginTop:"2px"}}>Popular tags</h1>
       <br />
      {
        isDesktopOrLaptop &&
@@ -81,7 +81,7 @@ function Tags() {
             />
           );
         })}
-      </div> : <Info msg="No Questions are available" type="info"></Info>}
+      </div> : <div style={{padding:"3px"}}><Info msg="No Questions are available" type="info" ></Info></div>}
       </>
      }
 
