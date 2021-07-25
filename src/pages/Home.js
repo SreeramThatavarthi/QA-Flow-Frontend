@@ -6,6 +6,7 @@ import BasePage from "./BasePage";
 import { AdminContext, QuestionContext } from "../Context/Context";
 import Info from "../components/Info";
 import PropagateLoader from "react-spinners/BeatLoader";
+import { toast } from "react-toastify";
 function Home() {
   const {questions, setQuestions} = useContext(QuestionContext)
   const history = useHistory();
@@ -27,6 +28,7 @@ function Home() {
   useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     if (localStorage.getItem("userData") === null) {
+      toast("Please login",{type:"warning"})
       history.push('/login')
     }
     else if (userData.user.role === "admin") {

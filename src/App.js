@@ -39,6 +39,7 @@ import Search from "./pages/Search";
 import AdminSearch from "./pages/Admin/AdminSearch";
 import { useMediaQuery } from 'react-responsive';
 import PersistentDrawerLeft from "./pages/NavBar";
+import { ToastContainer } from "react-toastify";
 const dummyOptions = [];
 
 function App() {
@@ -136,6 +137,7 @@ function App() {
 
   return (
     <div className="app">
+      <ToastContainer/>
       <ImageContext.Provider value={{ image, setImage }}>
         <AdminContext.Provider value={{ admin, setAdmin }}>
         <QuestionContext.Provider value={{ questions, setQuestions }}>

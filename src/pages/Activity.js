@@ -10,6 +10,15 @@ import { useHistory, useLocation } from "react-router-dom";
 import { config } from "../config";
 import { useMediaQuery } from 'react-responsive';
 import Info from "../components/Info";
+import PropagateLoader from "react-spinners/BeatLoader";
+import { css } from "@emotion/react";
+import { toast } from "react-toastify";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 function Activity() {
 
@@ -22,6 +31,7 @@ function Activity() {
 
     const history = useHistory();
     const location = useLocation()
+    const [loading,setLoading]=useState(true);
     let getPos = location.state === undefined ? 0 : location.state.pos
     const [value, setValue] = useState(getPos);
     const [userQuestions, setUserQuestions] = useState([]);
@@ -40,6 +50,7 @@ function Activity() {
             .then((res) => res.json())
             .then((data) => {
                 setUserQuestions(data["questions"]);
+                setLoading(false);
             });
     }
 
@@ -53,11 +64,13 @@ function Activity() {
             .then((res) => res.json())
             .then((data) => {
                 setuserAnswers(data["answers"]);
+                setLoading(false);
             });
     }
 
     useEffect(() => {
         if (localStorage.getItem("userData") === null) {
+            toast("Please login",{type:"warning"})
             history.push("/login");
         } else {
             getUserQuestions()
@@ -67,6 +80,7 @@ function Activity() {
 
     return (
         <BasePage>
+        <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" loading={loading} css={override} size={10} /></div>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} centered>
                     <Tab icon={<HelpIcon />} label="Questions" />
@@ -116,7 +130,10 @@ function Activity() {
                     </div>
                     }
                     </>
-                    : <Info msg="You have not posted any Questions" type="info"></Info>
+                    : (
+                            (!loading)&&
+                            <div style={{padding:"3px"}}> <Info msg="You have not posted any Questions" type="info"></Info></div>
+                    )
                 }
 
 
@@ -165,7 +182,7 @@ function Activity() {
                     }
                      </>
                     :
-                    <Info msg="You have not posted any Answers" type="success"></Info>
+                    <div style={{padding:"3px"}}><Info msg="You have not posted any Answers" type="success"></Info></div>
                 }
                
 

@@ -45,7 +45,6 @@ const AllUsers = () => {
                     <AdminBasePage>
                         {/* <GridContainer> */}
                         <Grid container spacing={2}>
-
                             {
                                 users.map((user) => {
                                     return (
@@ -56,7 +55,6 @@ const AllUsers = () => {
                                 })
                             }
                         </Grid>
-
                         {/* </GridContainer> */}
                     </AdminBasePage>
                 ) : (<h2 style={{ marginTop: "20px", padding: "20px", textAlign: "center" }}>Only admins can access this page</h2>)

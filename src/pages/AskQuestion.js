@@ -165,6 +165,7 @@ function AskQuestion(props) {
 
   useEffect(() => {
     if (localStorage.getItem("userData") === null) {
+      toast("Please login",{type:"warning"})
       history.push('/login')
     }
   }, [history]);

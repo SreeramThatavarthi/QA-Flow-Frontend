@@ -8,6 +8,7 @@ import Info from "../components/Info";
 import { useMediaQuery } from 'react-responsive';
 import PropagateLoader from "react-spinners/BeatLoader";
 import { css } from "@emotion/react";
+import { toast } from "react-toastify";
 
 const override = css`
   display: block;
@@ -30,6 +31,7 @@ function Tags() {
 
   useEffect(() => {
     if (localStorage.getItem("userData") === null) {
+      toast("Please login",{type:"warning"})
       history.push('/login')
     }
     const userData = JSON.parse(localStorage.getItem('userData'))

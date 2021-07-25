@@ -157,14 +157,15 @@ export default function PersistentDrawerLeft() {
               </ListItem>
              </Link>
 
-            <Link to="/ask_question" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
-              <ListItem button>
-                <HomeIcon style={{marginRight:"14px"}}/>
+            <Link  style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
+              <ListItem onClick={()=>{
+              handleDrawerClose();
+              history.push('/ask_question');
+            }} button>
+                <AssignmentLateIcon style={{marginRight:"14px"}}/>
                 Ask a question
               </ListItem>
              </Link>
-
-           
 
              <Link to="/activity" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
               <ListItem button>
@@ -179,19 +180,21 @@ export default function PersistentDrawerLeft() {
                 Tags
               </ListItem>
              </Link>
-
-             <Link to="/login" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
-              <ListItem button  onClick={() => {
-                        localStorage.removeItem("userData");
-                        localStorage.removeItem("profilePic");
-                        setImage(null);
-                        localStorage.removeItem("randid");
-                        localStorage.removeItem("googleAccessToken");
-                      }}>
-                <ExitToAppIcon style={{marginRight:"14px"}}/>
-                LogOut
-              </ListItem>
-             </Link>
+             {
+               (User)&&
+               <Link to="/login" onClick={handleDrawerClose} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
+               <ListItem button  onClick={() => {
+                         localStorage.removeItem("userData");
+                         localStorage.removeItem("profilePic");
+                         setImage(null);
+                         localStorage.removeItem("randid");
+                         localStorage.removeItem("googleAccessToken");
+                       }}>
+                 <ExitToAppIcon style={{marginRight:"14px"}}/>
+                 LogOut
+               </ListItem>
+              </Link>
+             }
         </List>
       </Drawer>
     </div>
