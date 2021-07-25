@@ -219,7 +219,9 @@ function App() {
           }
           {
             isTabletOrMobileDevice &&
-            <PersistentDrawerLeft/>
+            <div style={{marginBottom:"60px"}}>
+            <PersistentDrawerLeft />
+            </div>
           }
           <Switch>
             <Route exact path="/question/:id">
