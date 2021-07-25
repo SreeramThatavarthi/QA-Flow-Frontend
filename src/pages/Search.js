@@ -4,6 +4,7 @@ import BasePage from "./BasePage";
 import { useHistory, useParams } from 'react-router-dom';
 import { config } from "../config";
 import QuestionCard from '../components/QuestionCard';
+import PropagateLoader from "react-spinners/BeatLoader";
 
 function Search() {
     let { id } = useParams();
@@ -11,6 +12,7 @@ function Search() {
     const history = useHistory();
     
     const [questions, setQuestions] = useState([]);
+    const [loading,setLoading]=useState(true);
     // if(questions==[])
     // {
     //     nf=true;
@@ -56,6 +58,7 @@ function Search() {
                    history.push('/')    
                 }
                 setQuestions(data["questions"]);
+                setLoading(false);
             });
         }
 
@@ -65,6 +68,9 @@ function Search() {
     return (
         <BasePage>
          {
+             (!loading) ?(
+                 <>
+                 {
             (questions.length>0)?(
                 questions.map((question) => (
                         <QuestionCard
@@ -85,6 +91,11 @@ function Search() {
                     <h1 style={{textAlign:"center",marginTop:"200px"}}>No questions found,Try some other tags</h1>
                 )
                 }
+                </>
+             ):(
+                <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" size={10} /></div>
+             )
+         }
         </BasePage>
 
     );
