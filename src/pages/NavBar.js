@@ -157,11 +157,10 @@ export default function PersistentDrawerLeft() {
               </ListItem>
              </Link>
 
-            <Link  style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
-              <ListItem onClick={()=>{
+             <Link to="/ask_question" onClick={()=>{
               handleDrawerClose();
-              history.push('/ask_question');
-            }} button>
+            }} style={{color:"#000",textDecoration:"none",fontSize:"17px"}} >
+              <ListItem  button>
                 <AssignmentLateIcon style={{marginRight:"14px"}}/>
                 Ask a question
               </ListItem>

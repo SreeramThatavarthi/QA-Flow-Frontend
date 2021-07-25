@@ -18,7 +18,7 @@ const KeyCodes = {
 
 const delimiters = [ KeyCodes.enter];
 
-function AskQuestion(props) {
+function AskQuestion() {
   const inputFile = useRef(null)
   const history = useHistory();
   const location = useLocation()
