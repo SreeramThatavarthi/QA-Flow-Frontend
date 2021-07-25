@@ -5,12 +5,13 @@ import { config } from "../config";
 import BasePage from "./BasePage";
 import { AdminContext, QuestionContext } from "../Context/Context";
 import Info from "../components/Info";
-
+import PropagateLoader from "react-spinners/BeatLoader";
 function Home() {
   const {questions, setQuestions} = useContext(QuestionContext)
   const history = useHistory();
   const location = useLocation()
   const { setAdmin } = useContext(AdminContext);
+  const [loading,setLoading]=useState(true);
 
   const updateQuestion = (question) => {
     let questions_ = questions.map((q) => {
@@ -43,6 +44,7 @@ function Home() {
           .then((res) => res.json())
           .then((data) => {
             setQuestions(data["question"]);
+            setLoading(false);
           });
       } else {
         console.log('here')
@@ -57,6 +59,7 @@ function Home() {
           },
         }).then((res) => res.json()).then((data) => {
           setQuestions(data["questions"]);
+      setLoading(false);
         });
       }
     }
@@ -65,7 +68,8 @@ function Home() {
   return (
     <BasePage>
       {
-        questions.length !== 0 ? questions.map((question) => {
+        (!loading)?(
+          questions.length !== 0 ? (questions.map((question) => {
           return (
             <QuestionCard
               title={question.title}
@@ -81,7 +85,8 @@ function Home() {
               updateQuestion={updateQuestion}
             />
           );
-        }) : <div className="p-2"><Info msg="No Questions are available" type="info"></Info></div>
+        })) : (<div className="p-2"><Info msg="No Questions are available" type="info"></Info></div>)):
+        (<div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" size={10} /></div>)
       }
     </BasePage>
   );

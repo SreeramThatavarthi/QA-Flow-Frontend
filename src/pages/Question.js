@@ -11,7 +11,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-
+import PropagateLoader from "react-spinners/BeatLoader";
+import { css } from "@emotion/react";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 function Question(props) {
     let { id } = useParams();
     const inputFile = useRef(null)
@@ -22,9 +28,9 @@ function Question(props) {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [file, setFile] = useState('');
-    // const [showTextArea, setShowTextArea] = useState(boolTextBox);
+    const [showTextArea, setShowTextArea] = useState(boolTextBox);
     const [ansText, setAnsText] = useState(ansTextBox)
-    var showTextArea=boolTextBox;
+    const [loading,setLoading]=useState(true)
     const uploadDoc = (e) => {
         console.log(e.target.files[0])
         setFile('')
@@ -87,7 +93,7 @@ function Question(props) {
         }).then((res) => {
             return res.json();
         }).then((data) => {
-            showTextArea=false;
+            setShowTextArea(false);
             setAnsText('')
             toast.success('Answer Posted 👍🏻', {
                 autoClose: 3000,
@@ -111,6 +117,7 @@ function Question(props) {
             .then((data) => {
                 setQuestions([data["question"]]);
                 setAnswers(data["answers"]);
+                setLoading(false);
             });
     }
     function handleUpdateAns() {
@@ -139,6 +146,7 @@ function Question(props) {
     }, []);
     return (
         <BasePage>
+        <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" loading={loading} size={10} /></div>
             <ToastContainer position="top-center" />
             {questions.map((question) => {
                 return (
@@ -161,19 +169,24 @@ function Question(props) {
             <Container style={{ marginTop: "20px", marginBottom: "20px", paddingRight: "20px" }}>
                 <Row>
                     <Col sm={8}>
-                        {
-                            answers.length === 0 ? <h5>Be the first one to Answer 👉🏻</h5> : <h5>{showTextArea ? "Add Answer" : `Answers 👇🏻`}</h5>
+                        {(!loading)&&
+                        <>
+                            {answers.length === 0 ? <h5>Be the first one to Answer 👉🏻</h5> : <h5>{showTextArea ? "Add Answer" : `Answers 👇🏻`}</h5>}</>
                         }
                     </Col>
+                    {
+                        (!loading)&&
                     <Col sm={4}>
+                        
                         {!showTextArea ? (
                             <button
                                 type="button"
                                 class="btn btn-primary"
                                 style={{ float: "right" }}
-                                onClick={() => {showTextArea=showTextArea?false:true}}
+                                onClick={() => {setShowTextArea(!showTextArea)}}
                             >
-                                <strong> Add Answer  <i class="bi bi-plus-circle" style={{ fontSize: "15px" }}></i></strong>
+                                
+                                    <strong> Add Answer  <i class="bi bi-plus-circle" style={{ fontSize: "15px" }}></i></strong>
                             </button>
                         ) : (
                             <>
@@ -181,7 +194,7 @@ function Question(props) {
                                     type="button"
                                     class="btn btn-danger"
                                     style={{ float: "right" }}
-                                    onClick={() => {showTextArea=showTextArea?false:true}}
+                                    onClick={() => {setShowTextArea(!showTextArea)}}
                                 >
                                     <strong>Close <i class="bi bi-x-circle" style={{ fontSize: "15px" }}></i> </strong>
                                 </button>
@@ -196,11 +209,12 @@ function Question(props) {
                             </>
                         )}
                     </Col>
+                    }
                 </Row>
             </Container>
 
             {showTextArea ? (
-                <>
+                <div className="p-2">
                     <TextEditor setText={setAnsText} text={ansText}></TextEditor>
                     <Button
                         onClick={() => {
@@ -222,7 +236,7 @@ function Question(props) {
                             null
                     }
 
-                </>
+                </div>
 
             ) : (
                 <div className="p-2">
