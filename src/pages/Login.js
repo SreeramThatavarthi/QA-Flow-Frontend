@@ -16,20 +16,20 @@ function Login() {
   const ResponseGoogle = (response) => {
     console.log(response)
     console.log(response.tokenId)
-     
+      localStorage.setItem("googleAccessToken", response.tokenId);
+      localStorage.setItem("profilePic", response.profileObj.imageUrl);
+      setImage(response.profileObj.imageUrl);
       axios.post(`${config.apiUrl}/api/google-login`, {
         idToken: response.tokenId
       })
         .then(function (response) {
-          localStorage.setItem("googleAccessToken", response.tokenId);
-          localStorage.setItem("profilePic", response.profileObj.imageUrl);
-          setImage(response.profileObj.imageUrl);
-          
+   
           toast("Google SignIn Success",{type:"success"});
           localStorage.setItem("userData", JSON.stringify(response.data));
           history.push('/')
         })
         .catch(function (error) {
+          console.log(error)
           toast("Google SignIn Failed, Try Again",{type:"error"});
         });
   };
