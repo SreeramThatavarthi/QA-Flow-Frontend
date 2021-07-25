@@ -130,7 +130,7 @@ function AskQuestion() {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      console.log("res",res)
+      toast("You have updated the question successfully",{type:"success"})
       setTags([]);
       setQuestion("");
       setTitle("");

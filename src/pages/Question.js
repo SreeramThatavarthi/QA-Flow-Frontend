@@ -145,6 +145,8 @@ function Question() {
                 "Content-Type": "application/json",
             },
         }).then((res) => {
+      toast("You have updated the answer successfully",{type:"success"})
+
             setAnsText('')
             history.push({
                 pathname: "/activity",
