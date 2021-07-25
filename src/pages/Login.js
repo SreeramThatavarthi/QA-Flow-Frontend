@@ -16,15 +16,15 @@ function Login() {
   const ResponseGoogle = (response) => {
     console.log(response)
     console.log(response.tokenId)
-    // if (response.profileObj.imageUrl) {
-      localStorage.setItem("googleAccessToken", response.tokenId);
-      localStorage.setItem("profilePic", response.profileObj.imageUrl);
-
-      setImage(response.profileObj.imageUrl);
+     
       axios.post(`${config.apiUrl}/api/google-login`, {
         idToken: response.tokenId
       })
         .then(function (response) {
+          localStorage.setItem("googleAccessToken", response.tokenId);
+          localStorage.setItem("profilePic", response.profileObj.imageUrl);
+          setImage(response.profileObj.imageUrl);
+          
           toast("Google SignIn Success",{type:"success"});
           localStorage.setItem("userData", JSON.stringify(response.data));
           history.push('/')
@@ -35,11 +35,6 @@ function Login() {
   };
   return (
     <>
-      <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div className="centered">
         <div className="d-flex" style={{ marginTop: "80px" }}>
           <img

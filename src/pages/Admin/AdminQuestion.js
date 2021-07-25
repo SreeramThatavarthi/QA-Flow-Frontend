@@ -140,7 +140,6 @@ function Question(props) {
     }, []);
     return (
         <AdminBasePage>
-            <ToastContainer position="top-center" />
             {questions.map((question) => {
                 return (
                     <AdminQuestionCard

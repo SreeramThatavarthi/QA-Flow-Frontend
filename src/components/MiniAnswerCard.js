@@ -63,7 +63,7 @@ export default function MiniAnswerCard({ id, questionId, postedOn, tags, title, 
 
   return (
     <>
-      <Card className={classes.root} variant="outlined" style={{ backgroundColor: "#c8e6c9" }}>
+      <Card className={classes.root} variant="outlined" style={{ backgroundColor: "#c8e6c9",marginBottom:"2px"  }}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             Question Title

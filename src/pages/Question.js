@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import BasePage from "./BasePage";
 import { Button } from "@material-ui/core";
 import { config } from "../config";
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import QuestionCard from "../components/QuestionCard";
 import TextEditor from "../components/TextEditor"
@@ -12,13 +14,23 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import PropagateLoader from "react-spinners/BeatLoader";
+import { useMediaQuery } from 'react-responsive';
+
+import ReactHtmlParser from 'html-react-parser';
 import { css } from "@emotion/react";
+import MiniTextEditor from "../components/MiniTextEditor";
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
 function Question() {
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-device-width: 1224px)'
+      })
+      const isTabletOrMobileDevice = useMediaQuery({
+        query: '(max-device-width: 1224px)'
+      })
     let { id } = useParams();
     const inputFile = useRef(null)
     const history = useHistory();
@@ -147,7 +159,6 @@ function Question() {
     return (
         <BasePage>
         <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" loading={loading} size={10} /></div>
-            <ToastContainer position="top-center" />
             {questions.map((question) => {
                 return (
                     <QuestionCard
@@ -215,7 +226,14 @@ function Question() {
 
             {showTextArea ? (
                 <div className="p-2">
+                    {
+                        isDesktopOrLaptop &&
                     <TextEditor setText={setAnsText} text={ansText}></TextEditor>
+                    }
+                    {
+                        isTabletOrMobileDevice &&
+                            <MiniTextEditor setText={setAnsText} text={ansText}></MiniTextEditor>
+                    }
                     <Button
                         onClick={() => {
                             inputFile.current.click();
@@ -239,6 +257,7 @@ function Question() {
                 </div>
 
             ) : (
+                    (!loading)&&
                 <div className="p-2">
                     {answers.map((answer) => {
                         console.log(answer)

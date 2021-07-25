@@ -9,7 +9,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import TextEditor from '../components/TextEditor'
 import 'react-toastify/dist/ReactToastify.min.css';
 import "./AskQuestion.css";
+
 import { WithContext as ReactTags } from 'react-tag-input';
+import { useMediaQuery } from 'react-responsive';
+import ReactHtmlParser from 'html-react-parser';
+import MiniTextEditor from "../components/MiniTextEditor";
 
 const KeyCodes = {
   comma: 188,
@@ -19,6 +23,13 @@ const KeyCodes = {
 const delimiters = [ KeyCodes.enter];
 
 function AskQuestion() {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
+  const isTabletOrMobileDevice = useMediaQuery({
+    query: '(max-device-width: 1224px)'
+  })
+
   const inputFile = useRef(null)
   const history = useHistory();
   const location = useLocation()
@@ -180,7 +191,21 @@ function AskQuestion() {
             }} placeholder="Enter Question Title" value={title} />
           </InputGroup>
         </div>
+        {
+          isDesktopOrLaptop &&
         <TextEditor setText={setQuestion} text={question}></TextEditor>
+        }
+        {
+          isTabletOrMobileDevice &&
+          // <div style={{ marginBottom: "15px" }}>
+          //   <InputGroup size="lg">
+          //     <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" as="textarea" rows={7} onChange={(e) => {
+          //       setQuestion(e.target.value);
+          //     }} placeholder="Description"/>
+          //   </InputGroup>
+          // </div>
+          <MiniTextEditor setText={setQuestion} text={question}></MiniTextEditor>
+        }
         <div style={{ marginTop: "15px" }}>
 
         <ReactTags 
@@ -192,15 +217,6 @@ function AskQuestion() {
           delimiters={delimiters}
         />
 
-          {/* <Chips
-            value={tags}
-            onChange={(e) => {
-              console.log(e)
-              setTags(e)
-            }}
-            placeholder="Enter tags here, seprate by ,"
-            uniqueChips={true}
-          /> */}
         </div>
         <div>
           <Button
