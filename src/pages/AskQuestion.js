@@ -171,11 +171,7 @@ function AskQuestion() {
 
   return (
     <BasePage>
-      <ToastContainer position="top-center" hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+     
       <Paper className="form-container" elevation={2}>
         <div style={{ marginBottom: "15px" }}>
           <InputGroup size="lg">
