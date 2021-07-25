@@ -25,16 +25,19 @@ function Tags() {
       history.push('/login')
     }
     const userData = JSON.parse(localStorage.getItem('userData'))
-    fetch(`${config.apiUrl}/api/questions`, {
-      headers: {
-        Authorization: `Bearer ${userData.token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setQuestions(data["question"]);
-      });
+    if(userData)
+    {
+      fetch(`${config.apiUrl}/api/questions`, {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setQuestions(data["question"]);
+        });
+    }
   }, []);
 
   return (

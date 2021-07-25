@@ -38,6 +38,7 @@ import AdminActivity from "./pages/Admin/AdminActivity";
 import Search from "./pages/Search";
 import AdminSearch from "./pages/Admin/AdminSearch";
 import { useMediaQuery } from 'react-responsive';
+import PersistentDrawerLeft from "./pages/NavBar";
 const dummyOptions = [];
 
 function App() {
@@ -218,80 +219,7 @@ function App() {
           }
           {
             isTabletOrMobileDevice &&
-            <AppBar position="sticky" style={{height:"60px"}}>
-            <Toolbar>
-              <Typography className="bold-text flex-08" variant="h6">
-                <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
-                  QA-Flow
-								</Link>
-              </Typography>
-              {image !== null ? (
-                <>
-                  <form
-                    className="flex-02"
-                    onSubmit={(e) => {
-                      console.log("here");
-                      e.preventDefault();
-                      handleSearch();
-                    }}
-                  >
-                    <TextField
-                      value={searchText}
-                      onChange={(e) => {
-                        console.log("here", e.target.value);
-                        setSearchText(e.target.value);
-                      }}
-                      size="small"
-                      id="outlined-search"
-                      type="search"
-                      placeholder="Search Tags"
-                      variant="outlined"
-                      autoComplete='off'
-                      color='primary'
-                      style={{ backgroundColor: "#3C4A9C", borderRadius: "10px", width: "100%" }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon style={{ marginRight: "2px", color: "white" }} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </form>
-                  <IconButton onClick={openMenu_} ref={menuRef}>
-                    <Avatar alt="Remy Sharp" src={image} />
-                  </IconButton>
-                  <Menu open={openMenu} onClose={closeMenu_} anchorEl={menuRef.current} keepMounted>
-                    <MenuItem
-                      onClick={() => {
-                        setOpenMenu(false);
-                        if (admin) {
-                          history.push("/admin/profile");
-                        } else {
-                          history.push("/profile");
-                        }
-                      }}
-                    >
-                      Profile
-										</MenuItem>
-                    <MenuItem
-                      onClick={() => {
-                        localStorage.removeItem("userData");
-                        localStorage.removeItem("profilePic");
-                        setImage(null);
-                        localStorage.removeItem("randid");
-                        localStorage.removeItem("googleAccessToken");
-                        setOpenMenu(false);
-                        history.push("/login");
-                      }}
-                    >
-                      Logout
-										</MenuItem>
-                  </Menu>
-                </>
-              ) : null}
-            </Toolbar>
-          </AppBar>
+            <PersistentDrawerLeft/>
           }
           <Switch>
             <Route exact path="/question/:id">
