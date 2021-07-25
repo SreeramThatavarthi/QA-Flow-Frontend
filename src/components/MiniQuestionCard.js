@@ -136,7 +136,7 @@ export default function MiniQuestionCard({ id, tags, title, body, getUserQuestio
                 style={{ backgroundColor: "#4caf50", color: "white", textTransform: "none" }}
                 onClick={() => {
                   history.push({
-                    pathname: "/ask_question",
+                    pathname: "/edit/question",
                     state: { QTitle: title, body: body, tags: tags, id: id },
                   });
                 }}

@@ -18,7 +18,7 @@ const override = css`
   margin: 0 auto;
   border-color: red;
 `;
-function Question(props) {
+function Question() {
     let { id } = useParams();
     const inputFile = useRef(null)
     const history = useHistory();

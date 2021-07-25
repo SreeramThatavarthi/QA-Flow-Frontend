@@ -28,7 +28,6 @@ function Home() {
   useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     if (localStorage.getItem("userData") === null) {
-      toast("Please login",{type:"warning"})
       history.push('/login')
     }
     else if (userData.user.role === "admin") {

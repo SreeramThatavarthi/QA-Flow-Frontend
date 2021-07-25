@@ -18,12 +18,13 @@ const KeyCodes = {
 
 const delimiters = [ KeyCodes.enter];
 
-const AskQuestion=()=> {
+const EditQuestion=()=> {
   const inputFile = useRef(null)
   const history = useHistory();
-  const [questionTitle,setQuestionTitle]=useState("");
-  const [questionBody,setQuestionBody]=useState("");
-  const [questionTags,setQuestionTags]=useState([]);
+  const location = useLocation()
+  let questionTitle = location.state === undefined ? "" : location.state.QTitle
+  let questionBody = location.state === undefined ? "" : location.state.body
+  let questionTags = location.state === undefined ? [] : location.state.tags
   const [title, setTitle] = useState(questionTitle);
   const [file, setFile] = useState('');
   const [question, setQuestion] = useState(questionBody);
@@ -53,52 +54,42 @@ const AskQuestion=()=> {
   
     //  setTags(newTags);
     }
-  const createQuestion = () => {
+  console.log(location.state)
+
+  const updateQuestion = () => {
     if(title!=''&&question!='' )
     {
     Object.entries(tags).map((s,t)=>{
       productTags.push(s[1].id);
     })
     const userData = JSON.parse(localStorage.getItem('userData'))
-    console.log(file);
-    fetch(`${config.apiUrl}/api/new/question`, {
+    fetch(`${config.apiUrl}/api/edit/question`, {
       body: JSON.stringify({
-        postedBy: `${userData.user._id}`,
+        questionId: `${location.state.id}`,
         title: title,
         body: question,
         tags: productTags,
         file: file
       }),
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${userData.token}`,
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      console.log("res",res);
       setTags([]);
       setQuestion("");
       setTitle("");
-      toast.success('Question Posted 👍🏻', {
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        onClose: function () {
-          history.push("/");
-        }
+      history.push({
+        pathname: "/activity",
+        state: { pos: 0 },
       });
-    })
-    .catch((err)=>{
-      toast(err,{type:"error"});
-    })
-  }
-  else{
+    });
+    }
+    else{
     toast("Please Enter Title and Description of the question",{type:"error"});
+    }
   }
-  };
 
   const uploadDoc = (e) => {
     console.log(e.target.files[0])
@@ -127,6 +118,10 @@ const AskQuestion=()=> {
   }
 
   useEffect(() => {
+    questionTags.map((q)=>{
+      console.log(q);
+      tags.push({ id:q, text: q });
+    })
     if (localStorage.getItem("userData") === null) {
       toast("Please login",{type:"warning"})
       history.push('/login')
@@ -183,14 +178,14 @@ const AskQuestion=()=> {
               null
           }
               <Button
-                onClick={createQuestion}
+                onClick={updateQuestion}
                 color="primary"
                 className="submit-btn"
                 variant="contained"
                 style={{ backgroundColor: "#4caf50", color: "white", textTransform: "none", float: "right" }}
               >
-                <b>Submit</b>
-              </Button> 
+                <b>Update</b>
+              </Button>
         </div>
         <input type='file' id='file' ref={inputFile} style={{ display: 'none' }} onChange={uploadDoc} />
       </Paper>
@@ -198,4 +193,4 @@ const AskQuestion=()=> {
   );
 }
 
-export default AskQuestion;
+export default EditQuestion;
