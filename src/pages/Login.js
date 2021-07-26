@@ -37,7 +37,7 @@ function Login() {
   return (
     <>
       <div className="centered">
-      <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" loading={loading} size={10} /></div>
+      <div style={{position:"fixed",top:"50%",left:"44%"}}><PropagateLoader color="#3C4A9C" loading={loading} size={40} /></div>
         <div className="d-flex" style={{ marginTop: "80px" }}>
           <img
             alt="gitam-logo"
