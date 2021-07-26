@@ -24,7 +24,6 @@ import { AdminContext } from '../Context/Context';
 function Profile() {
   const history = useHistory();
   const { admin } = useContext(AdminContext);
-  console.log(admin)
   const [image, setImage] = React.useState('');
   const [editBool, seteditBool] = React.useState(false);
   const [name, setName] = React.useState('');
@@ -61,7 +60,6 @@ function Profile() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setName(data.user.name)
         setEmail(data.user.email);
         setImage(data.user.profile_pic_url)

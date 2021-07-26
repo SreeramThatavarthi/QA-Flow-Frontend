@@ -48,7 +48,6 @@ function Home() {
             setLoading(false);
           });
       } else {
-        console.log('here')
         fetch(`${config.apiUrl}/api/search/questions`, {
           body: JSON.stringify({
             tags: location.state.tags,

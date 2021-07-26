@@ -17,8 +17,6 @@ function Login() {
   const [loading,setLoading]=useState(false)
   const ResponseGoogle = (response) => {
     setLoading(true)
-    console.log(response)
-    console.log(response.tokenId)
       localStorage.setItem("googleAccessToken", response.tokenId);
       localStorage.setItem("profilePic", response.profileObj.imageUrl);
       setImage(response.profileObj.imageUrl);
@@ -26,20 +24,20 @@ function Login() {
         idToken: response.tokenId
       })
         .then(function (response) {
-          setLoading(false);
-          toast("Google SignIn Success",{type:"success"});
           localStorage.setItem("userData", JSON.stringify(response.data));
-          history.push('/')
+          history.push('/');
+          setLoading(false)
+          toast("Google SignIn Success",{type:"success"});
         })
         .catch(function (error) {
-          console.log(error)
           toast("Google SignIn Failed, Try Again",{type:"error"});
+          setLoading(false)
         });
   };
   return (
     <>
       <div className="centered">
-      <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" size={10} /></div>
+      <div style={{position:"fixed",top:"50%",left:"50%"}}><PropagateLoader color="#3C4A9C" loading={loading} size={10} /></div>
         <div className="d-flex" style={{ marginTop: "80px" }}>
           <img
             alt="gitam-logo"

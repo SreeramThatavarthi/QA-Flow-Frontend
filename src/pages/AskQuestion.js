@@ -61,7 +61,6 @@ function AskQuestion() {
   
     //  setTags(newTags);
     }
-  console.log(location.state)
 
   const createQuestion = () => {
     if(title!=''&&question!='' )
@@ -71,7 +70,6 @@ function AskQuestion() {
           productTags.push(s[1].id);
         })
     const userData = JSON.parse(localStorage.getItem('userData'))
-    console.log(file);
     fetch(`${config.apiUrl}/api/new/question`, {
       body: JSON.stringify({
         postedBy: `${userData.user._id}`,
@@ -86,7 +84,6 @@ function AskQuestion() {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      console.log("res",res);
       setTags([]);
       setQuestion("");
       setTitle("");
@@ -143,10 +140,8 @@ function AskQuestion() {
   }
 
   const uploadDoc = (e) => {
-    console.log(e.target.files[0])
     setFile('')
     var FileSize = e.target.files[0].size / 1024 / 1024; // in MiB
-    console.log(FileSize);
     if (FileSize > 0.05) {
       toast.error('Max file size is 50 KB ❕', {
         autoClose: 2000,
@@ -158,11 +153,9 @@ function AskQuestion() {
       });
     }
     else {
-      console.log("true")
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = function () {
-        console.log(reader.result)
         setFile(reader.result);
       };
     }
@@ -170,7 +163,6 @@ function AskQuestion() {
 
   useEffect(() => {
     questionTags.map((q)=>{
-      console.log(q);
       tags.push({ id:q, text: q });
     })
 

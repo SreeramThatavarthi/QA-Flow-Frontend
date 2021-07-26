@@ -45,7 +45,6 @@ function Tags() {
         .then((res) => res.json())
         .then((data) => {
           setLoading(false)
-          console.log(data);
           setQuestions(data["question"]);
         });
     }

@@ -14,7 +14,6 @@ const AdminAllQuestions = () => {
   const history = useHistory();
   const { admin } = useContext(AdminContext);
   const removeQuestion = (id) => {
-    console.log(id)
     const userData = JSON.parse(localStorage.getItem('userData'))
     fetch(`${config.apiUrl}/api/delete/question?questionId=${id}`, {
       method: 'DELETE',
@@ -34,8 +33,7 @@ const AdminAllQuestions = () => {
           .then((data) => {
             setQuestions(data["question"]);
           });
-      })
-      .catch((err) => console.log(err));
+      });
   }
 
   useEffect(() => {

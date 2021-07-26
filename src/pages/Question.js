@@ -44,7 +44,6 @@ function Question() {
     const [ansText, setAnsText] = useState(ansTextBox)
     const [loading,setLoading]=useState(true)
     const uploadDoc = (e) => {
-        console.log(e.target.files[0])
         setFile('')
         var FileSize = e.target.files[0].size / 1024 / 1024; // in MiB
         if (FileSize > 5) {
@@ -61,7 +60,6 @@ function Question() {
             var reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = function () {
-                console.log(reader.result)
                 setFile(reader.result);
             };
         }
@@ -78,7 +76,6 @@ function Question() {
         setQuestions(questions_);
     };
     const updateAnswer = (answer) => {
-        console.log(answer);
         let answers_ = answers.map((a) => {
             if (a._id === answer._id) {
                 return answer;
@@ -269,7 +266,6 @@ function Question() {
                     (!loading)&&
                 <div className="p-2">
                     {answers.map((answer) => {
-                        console.log(answer)
                         return (
                             <AnswerCard
                                 body={answer.body}

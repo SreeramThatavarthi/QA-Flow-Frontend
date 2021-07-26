@@ -21,7 +21,6 @@ function AnswerCard({
   updateAnswer,
   file = ''
 }) {
-  console.log(file)
   let [disableLike, setDisableLike] = useState(false)
   let [disableDisLike, setdisableDisLike] = useState(false)
   const userData = JSON.parse(localStorage.getItem('userData'))

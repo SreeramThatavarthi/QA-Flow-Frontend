@@ -15,7 +15,6 @@ const AdminAllAnswers = () => {
     const history = useHistory();
     const { admin } = useContext(AdminContext);
     const removeAnswers = (id) => {
-        console.log(id)
         const userData = JSON.parse(localStorage.getItem('userData'))
         fetch(`${config.apiUrl}/api/delete/answer?answerId=${id}`, {
             method: 'DELETE',

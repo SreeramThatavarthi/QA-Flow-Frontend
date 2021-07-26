@@ -57,8 +57,7 @@ export default function MiniAnswerCard({ id, questionId, postedOn, tags, title, 
       .then((data) => {
         handleCloseAlert()
         getUserAnswers()
-      })
-      .catch((err) => console.log(err));
+      });
   }
 
   return (

@@ -8,7 +8,6 @@ import PropagateLoader from "react-spinners/BeatLoader";
 
 function Search() {
     let { id } = useParams();
-    console.log(id);
     const history = useHistory();
     
     const [questions, setQuestions] = useState([]);
@@ -52,7 +51,6 @@ function Search() {
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json()).then((data) => {
-                console.log(data);
                 if(data==[])
                 {
                    history.push('/')    
@@ -63,7 +61,6 @@ function Search() {
         }
 
     }, [id])
-    console.log(questions.length)
 
     return (
         <BasePage>

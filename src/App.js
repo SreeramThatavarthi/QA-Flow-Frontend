@@ -70,10 +70,8 @@ function App() {
 
   const handleSearch = () => {
     let tags = searchText.split(",");
-    console.log(tags);
     if (localStorage.getItem("userData")) {
       var data = JSON.parse(localStorage.getItem("userData"));
-      console.log(data);
       if (data.user.role === "admin") {
         setAdmin(true);
         setSearchText("");
@@ -97,7 +95,6 @@ function App() {
     setImage(localStorage.getItem("profilePic"));
     if (localStorage.getItem("userData")) {
       var data = JSON.parse(localStorage.getItem("userData"));
-      console.log(data);
       if (data.user.role === "admin") {
         setAdmin(true)
       }
@@ -118,7 +115,6 @@ function App() {
             setQuestions(data["question"]);
           });
       } else {
-        console.log('here')
         fetch(`${config.apiUrl}/api/search/questions`, {
           body: JSON.stringify({
             tags: location.state.tags,
@@ -156,7 +152,6 @@ function App() {
                   <form
                     className="flex-02"
                     onSubmit={(e) => {
-                      console.log("here");
                       e.preventDefault();
                       handleSearch();
                     }}
@@ -164,7 +159,6 @@ function App() {
                     <TextField
                       value={searchText}
                       onChange={(e) => {
-                        console.log("here", e.target.value);
                         setSearchText(e.target.value);
                       }}
                       size="small"
