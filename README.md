@@ -1,8 +1,8 @@
-# Getting Started with Create React App
-
+# QA-FLOW
+<Strong>Overview</Strong>
 ### [Check it out here] 
-![](favicon/overview.png)
-[check it out here]: https://qa-flow.vercel.app/
+
+[Check it out here]:https://qa-flow.vercel.app/
 
 ## Available Scripts
 
